@@ -24,5 +24,31 @@ namespace PasswordManagerProject.Controllers
             return View(viewModel);
         }
 
+        // This should be [POST].
+        public ActionResult AddPassword(int UID, string password, string label)
+        {
+            var rPassword = new PasswordInfoRepository();
+            var passwordToAdd = new PasswordInfo();
+
+            // Create new PasswordInfo object and pass user parameters into it.
+            passwordToAdd.Password = password;
+            passwordToAdd.UserId = UID;
+            passwordToAdd.LabelType = label;
+
+            // Update the database.
+            rPassword.Add(passwordToAdd);
+            rPassword.Update();
+            
+
+            return RedirectToAction("Index", "Profile", new { userId = UID});
+        }
+
+        public ActionResult RemovePassword(int passID)
+        {
+            var rPassword = new PasswordInfoRepository();
+            //rPassword.Delete()
+            return RedirectToAction("Index", "Profile");
+        }
+
     }
 }
