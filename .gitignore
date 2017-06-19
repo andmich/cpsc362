@@ -1,4 +1,6 @@
 # Files resulting from buid #
+
+#############################
 [Db]ebug/
 [Db]ebugPublic/
 [Rr]elease/
@@ -11,9 +13,10 @@ bld/
 [Ll]og/
 .vs/
 
-**/bin
+
+PasswordManagerProject/bin/*
 packages
-**/obj
+PasswordManagerProject/obj/Debug/*
 *.suo
 
 # Compiled Source # 
