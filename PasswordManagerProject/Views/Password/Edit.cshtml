@@ -1,0 +1,10 @@
+﻿@model PasswordManagerProject.Models.PasswordViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Password</h2>
+
+<h1>@Model.PasswordInfo.Password</h1>
+
+@Html.TextArea("NewPassword", "", new { @class = "form-control" });

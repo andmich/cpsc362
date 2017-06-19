@@ -1,0 +1,32 @@
+﻿@model PasswordManagerProject.Models.ProfileViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>PROFILE INDEX</h2>
+<div>
+    <strong>User:</strong> @Model.UserInfo.Username
+    <br />
+    <strong>Fullname:</strong> @Model.UserInfo.FullName
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Password</th>
+            <th>Label</th>
+            <th>Edit</th>
+        </tr>        
+    </thead>
+    <tbody>
+        @*loop through all user passwords and list individual information*@
+        @foreach (var pass in Model.UserPasswords)
+        {
+            <tr>
+                <td>@pass.Password</td>
+                <td>@pass.LabelType</td>
+                <td><a class="btn" href="@Url.Action("Edit", "Password", new { passwordId = pass.PasswordId })">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
