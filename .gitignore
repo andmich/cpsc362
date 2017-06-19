@@ -1,7 +1,48 @@
-# Files to be ignored 
+# Files resulting from buid #
+[Db]ebug/
+[Db]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+.vs/
 
 **/bin
 packages
 **/obj
 *.suo
 
+# Compiled Source # 
+
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files # 
+
+######################
+.DS_Store
+.DS_Store?
+._*
+ehthumbs.db
+Thumbs.db
