@@ -14,9 +14,9 @@ bld/
 .vs/
 
 
-PasswordManagerProject/bin/*
+**/bin/
 packages
-PasswordManagerProject/obj/Debug/*
+**/obj/Debug/
 *.suo
 
 # Compiled Source # 
