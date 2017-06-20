@@ -36,6 +36,7 @@ namespace PasswordManagerProject.Controllers
             passwordToAdd.Password = password;
             passwordToAdd.UserId = UID;
             passwordToAdd.LabelType = label;
+            passwordToAdd.DateCreated = DateTime.Now;
 
             // Update the database.
             rPassword.Add(passwordToAdd);
@@ -86,6 +87,7 @@ namespace PasswordManagerProject.Controllers
             generatedPassword.Password = PasswordGenerator();
             generatedPassword.LabelType = label;
             generatedPassword.UserId = UID;
+            generatedPassword.DateCreated = DateTime.Now;
 
             // Add generated password into DB and update.
             rPassword.Add(generatedPassword);
