@@ -1,51 +1,5 @@
-# Files resulting from buid #
+# Files to be excluded #
+########################
 
-#############################
-[Db]ebug/
-[Db]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-.vs/
-
-
-**/bin/
-packages
-**/obj/Debug/
-*.suo
-
-# Compiled Source # 
-
-###################
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
-
-# Packages #
-
-############
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# OS generated files # 
-
-######################
-.DS_Store
-.DS_Store?
-._*
-ehthumbs.db
-Thumbs.db
+PasswordManagerProject/bin/
+packages/
