@@ -5,28 +5,21 @@
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+        @Styles.Render("~/css")
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    @*<p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>*@
+           <nav class="navbar navbar-inverse">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Password123</a>
                 </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">Passwords</a></li>
+                   <li><a href="#">My Profile</a></li>
+                </ul>
+              </div>
+            </nav>
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
