@@ -39,7 +39,7 @@ namespace PasswordManagerProject.DBML
     #endregion
 		
 		public PasswordManagerDBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["pass123dbConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["pass123dbConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -81,6 +81,14 @@ namespace PasswordManagerProject.DBML
 			get
 			{
 				return this.GetTable<PasswordInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<KeyInfo> KeyInfos
+		{
+			get
+			{
+				return this.GetTable<KeyInfo>();
 			}
 		}
 	}
@@ -591,6 +599,69 @@ namespace PasswordManagerProject.DBML
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KeyInfo")]
+	public partial class KeyInfo
+	{
+		
+		private System.Nullable<int> _UserId;
+		
+		private System.Nullable<int> _PrivateKey;
+		
+		private System.Nullable<int> _PublicKey;
+		
+		public KeyInfo()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int")]
+		public System.Nullable<int> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this._UserId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivateKey", DbType="Int")]
+		public System.Nullable<int> PrivateKey
+		{
+			get
+			{
+				return this._PrivateKey;
+			}
+			set
+			{
+				if ((this._PrivateKey != value))
+				{
+					this._PrivateKey = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicKey", DbType="Int")]
+		public System.Nullable<int> PublicKey
+		{
+			get
+			{
+				return this._PublicKey;
+			}
+			set
+			{
+				if ((this._PublicKey != value))
+				{
+					this._PublicKey = value;
+				}
 			}
 		}
 	}
