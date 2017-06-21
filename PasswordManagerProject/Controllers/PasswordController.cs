@@ -78,6 +78,23 @@ namespace PasswordManagerProject.Controllers
             return RedirectToAction("Index", "Profile", new { userId = UID });
         }
 
+        // This function should be [POST]
+        public ActionResult EditLabel(int UID, int passID, string label)
+        {
+            // Search for the password to edit the label.
+            var rPassword = new PasswordInfoRepository();
+            var passwordToEdit = rPassword.GetByPasswordId(passID);
+
+            // Assign the new label.
+            passwordToEdit.LabelType = label;
+
+            // Update DB.
+            rPassword.Update();
+
+            // Return back to the Profile Index page.
+            return RedirectToAction("Index", "Profile", new { userId = UID });
+        }
+
         public ActionResult GeneratePassword(int UID, string label)
         {
             var rPassword = new PasswordInfoRepository();
