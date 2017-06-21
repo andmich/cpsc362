@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>Password123</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/css")
@@ -14,10 +14,13 @@
                 <div class="navbar-header">
                   <a class="navbar-brand" href="#">Password123</a>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">Passwords</a></li>
-                   <li><a href="#">My Profile</a></li>
-                </ul>
+                @if (string.IsNullOrEmpty(ViewBag.Navigation))
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Passwords</a></li>
+                        <li><a href="#">My Profile</a></li>
+                    </ul>
+                }
               </div>
             </nav>
         </header>
