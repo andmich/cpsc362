@@ -19,8 +19,8 @@
                     @if (string.IsNullOrEmpty(ViewBag.Navigation))
                     {
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Passwords</a></li>
-                            <li><a href="#">My Profile</a></li>
+                            <li><a href="/Profile?userId=@HttpContext.Current.Session["userId"]">Passwords</a></li>
+                            <li><a href="#">Welcome!</a></li>
                         </ul>
                     }
                 </div>

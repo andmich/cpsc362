@@ -10,12 +10,15 @@ namespace PasswordManagerProject.Controllers
 {
     public class ProfileController : Controller
     {
-        
         public ActionResult Index(int userId)
         {
             // load UserInfo with UserId passed in
             var rUserInfo = new UserInfoRepository();
             var userInfo = rUserInfo.GetByUserId(userId);
+
+            // Session variable for userId. Need it 
+            // to persist throughout the user's session
+            Session["userId"] = userId;
 
             // get all user's passwords
             var rProfile = new PasswordInfoRepository();
