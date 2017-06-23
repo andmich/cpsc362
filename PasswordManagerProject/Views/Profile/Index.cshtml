@@ -17,6 +17,7 @@
                 <th>Label</th>
                 <th>Date Created</th>
                 <th>Edit</th>
+                <th>More Info</th>
             </tr>        
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <td>@pass.LabelType</td>
                     <td>@pass.DateCreated</td>
                     <td><a class="btn" href="@Url.Action("Edit", "Password", new { passwordId = pass.PasswordId })">Edit</a></td>
+                    <td><a id="additionalInfo" class="btn" href="#"><span class="glyphicon glyphicon-align-justify"></span></a></td>
                 </tr>
             }
         </tbody>

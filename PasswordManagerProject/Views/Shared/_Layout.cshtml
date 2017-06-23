@@ -19,8 +19,17 @@
                     @if (string.IsNullOrEmpty(ViewBag.Navigation))
                     {
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/Profile?userId=@HttpContext.Current.Session["userId"]">Passwords</a></li>
-                            <li><a href="#">Welcome!</a></li>
+                            <li><a href="/Profile?userId=@HttpContext.Current.Session["userId"]"><span class="glyphicon glyphicon-lock"></span> Passwords</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Welcome 
+                                    @HttpContext.Current.Session["userName"]!
+                                    <span class="glyphicon glyphicon-menu-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">My Profile</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     }
                 </div>
@@ -42,7 +51,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/js")
         @RenderSection("scripts", required: false)
     </body>
 </html>

@@ -19,6 +19,7 @@ namespace PasswordManagerProject.Controllers
             // Session variable for userId. Need it 
             // to persist throughout the user's session
             Session["userId"] = userId;
+            Session["userName"] = userInfo.Username; 
 
             // get all user's passwords
             var rProfile = new PasswordInfoRepository();
