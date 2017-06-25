@@ -33,7 +33,7 @@ namespace PasswordManagerProject.Controllers
             var passwordToAdd = new PasswordInfo();
 
             // Create new PasswordInfo object and pass user parameters into it.
-            passwordToAdd.Password = password;
+            //passwordToAdd.Password = password;                      ======== need to update to new binary stype
             passwordToAdd.UserId = UID;
             passwordToAdd.LabelType = label;
             passwordToAdd.DateCreated = DateTime.Now;
@@ -69,7 +69,7 @@ namespace PasswordManagerProject.Controllers
             var passwordToEdit = rPassword.GetByPasswordId(passID);
 
             // Assign the new password change.
-            passwordToEdit.Password = passwordChange;
+            //passwordToEdit.Password = passwordChange;                 ======== need to update to new binary type
 
             // Edit the password and update DB.
             rPassword.Update();
@@ -101,7 +101,7 @@ namespace PasswordManagerProject.Controllers
             var generatedPassword = new PasswordInfo();
 
             // Assign the generated password to the PasswordInfo object.
-            generatedPassword.Password = PasswordGenerator();
+            //generatedPassword.Password = PasswordGenerator();         ======== need to update to new binary stype
             generatedPassword.LabelType = label;
             generatedPassword.UserId = UID;
             generatedPassword.DateCreated = DateTime.Now;

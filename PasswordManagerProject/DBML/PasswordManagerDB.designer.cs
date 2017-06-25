@@ -39,7 +39,7 @@ namespace PasswordManagerProject.DBML
     #endregion
 		
 		public PasswordManagerDBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["pass123dbConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["pass123dbConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -76,19 +76,19 @@ namespace PasswordManagerProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<PasswordInfo> PasswordInfos
-		{
-			get
-			{
-				return this.GetTable<PasswordInfo>();
-			}
-		}
-		
 		public System.Data.Linq.Table<KeyInfo> KeyInfos
 		{
 			get
 			{
 				return this.GetTable<KeyInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PasswordInfo> PasswordInfos
+		{
+			get
+			{
+				return this.GetTable<PasswordInfo>();
 			}
 		}
 	}
@@ -372,6 +372,69 @@ namespace PasswordManagerProject.DBML
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KeyInfo")]
+	public partial class KeyInfo
+	{
+		
+		private System.Nullable<int> _UserId;
+		
+		private System.Nullable<int> _PrivateKey;
+		
+		private System.Nullable<int> _PublicKey;
+		
+		public KeyInfo()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int")]
+		public System.Nullable<int> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this._UserId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivateKey", DbType="Int")]
+		public System.Nullable<int> PrivateKey
+		{
+			get
+			{
+				return this._PrivateKey;
+			}
+			set
+			{
+				if ((this._PrivateKey != value))
+				{
+					this._PrivateKey = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicKey", DbType="Int")]
+		public System.Nullable<int> PublicKey
+		{
+			get
+			{
+				return this._PublicKey;
+			}
+			set
+			{
+				if ((this._PublicKey != value))
+				{
+					this._PublicKey = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PasswordInfo")]
 	public partial class PasswordInfo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -380,7 +443,7 @@ namespace PasswordManagerProject.DBML
 		
 		private int _PasswordId;
 		
-		private string _Password;
+		private System.Data.Linq.Binary _Password;
 		
 		private int _UserId;
 		
@@ -398,7 +461,7 @@ namespace PasswordManagerProject.DBML
     partial void OnCreated();
     partial void OnPasswordIdChanging(int value);
     partial void OnPasswordIdChanged();
-    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanging(System.Data.Linq.Binary value);
     partial void OnPasswordChanged();
     partial void OnUserIdChanging(int value);
     partial void OnUserIdChanged();
@@ -439,8 +502,8 @@ namespace PasswordManagerProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarBinary(500)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Password
 		{
 			get
 			{
@@ -599,69 +662,6 @@ namespace PasswordManagerProject.DBML
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KeyInfo")]
-	public partial class KeyInfo
-	{
-		
-		private System.Nullable<int> _UserId;
-		
-		private System.Nullable<int> _PrivateKey;
-		
-		private System.Nullable<int> _PublicKey;
-		
-		public KeyInfo()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int")]
-		public System.Nullable<int> UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this._UserId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivateKey", DbType="Int")]
-		public System.Nullable<int> PrivateKey
-		{
-			get
-			{
-				return this._PrivateKey;
-			}
-			set
-			{
-				if ((this._PrivateKey != value))
-				{
-					this._PrivateKey = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicKey", DbType="Int")]
-		public System.Nullable<int> PublicKey
-		{
-			get
-			{
-				return this._PublicKey;
-			}
-			set
-			{
-				if ((this._PublicKey != value))
-				{
-					this._PublicKey = value;
-				}
 			}
 		}
 	}
