@@ -5,16 +5,16 @@
         <title>Password123</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/css")
+        @Styles.Render("~/allcss")
     </head>
     <body>
         <header>
 
-           <nav class="navbar navbar-fixed navbar-inverse">
+           <nav class="navbar navbar-fixed-top navbar-inverse">
               <div class="container-fluid">
                 <div class="container">           
-                    <div class="navbar-header">                     
-                      <a class="navbar-brand" href="#"><span><img class="brand" src="~/Images/lock2.png" /></span> Password123</a>
+                    <div class="navbar-header">       
+                      <a class="navbar-brand" href="#"><span><img class="brand-img" src="~/Images/lock2.png" /> </span> Password123</a>
                     </div>
                     @if (string.IsNullOrEmpty(ViewBag.Navigation))
                     {
@@ -51,7 +51,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/js")
+        @Scripts.Render("~/alljs")
         @RenderSection("scripts", required: false)
     </body>
 </html>

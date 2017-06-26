@@ -13,16 +13,16 @@ namespace PasswordManagerProject
 
         public static void StyleBundle(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/css")
-                     .Include("~/Content/bootstrap.css")
-                     .Include("~/Content/mystyles.css"));
+            bundles.Add(new StyleBundle("~/allcss").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/mystyles.css"));
         }
 
         public static void ScriptBundle(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/js")
-                     .Include("~/Scripts/jquery-{version}.js")
-                     .Include("~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/alljs").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/bootstrap.js"));
         }
 
     }

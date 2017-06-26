@@ -2,6 +2,24 @@
     Any additional style changes will 
     be saved here
 */
+
+.brand-img {
+    display: inline-block;
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.navbar {
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
+}
+
+body {
+    background: #111F1A;
+    padding-top: 50px;
+}
+
 table.center {
     margin-left:auto; 
     margin-right:auto;
@@ -26,18 +44,6 @@ th {
 td {  
     background: #FAFAFA; /* Lighter grey background */
     text-align: center; /* Center our text */
-}
-
-
-.brand {
-    display: block;
-    width: 50px !important;
-    height: 50px !important;
-}
-
-.navbar {
-   background: rgba(0,0,0,0.5);   /* for latest browsers */
-   background: #000;  /* fallback for older browsers */
 }
 
 /* Cells in even rows (2,4,6...) are one color */        
