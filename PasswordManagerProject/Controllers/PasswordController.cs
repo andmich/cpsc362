@@ -65,15 +65,18 @@ namespace PasswordManagerProject.Controllers
             return RedirectToAction("Index", "Profile", new { userId = UID});
         }
 
-        // This function should be [POST]
+        // This function should be [POST]. NOTE: Master Password should be passed to this function.
         public ActionResult EditPassword(int UID, int passID, string passwordChange)
         {
+            // User cryptographic function.
+            PasswordCrypt userCrypt = new PasswordCrypt("Password123");
+
             // Search for the password to edit.
             var rPassword = new PasswordInfoRepository();
             var passwordToEdit = rPassword.GetByPasswordId(passID);
 
             // Assign the new password change.
-            //passwordToEdit.Password = passwordChange;                 ======== need to update to new binary type
+            passwordToEdit.Password = userCrypt.encryptPassword(passwordChange);
 
             // Edit the password and update DB.
             rPassword.Update();
@@ -99,23 +102,23 @@ namespace PasswordManagerProject.Controllers
             return RedirectToAction("Index", "Profile", new { userId = UID });
         }
 
-        public ActionResult GenerateAndSavePassword(int UID, string label)
-        {
+        // Get the plaintext version of the password. NOTE: Master Password should be passed to this function.
+        public string GetPassword(int UID, int passID)
+        {   
+            // Used to store the plain text of the password.
+            string plainTextPass = "";
+
+            // User cryptographic function.
+            PasswordCrypt userCrypt = new PasswordCrypt("Password123");
+
+            // Get the password to return.
             var rPassword = new PasswordInfoRepository();
-            var generatedPassword = new PasswordInfo();
+            var passwordToReturn = rPassword.GetByPasswordId(passID);
 
-            // Assign the generated password to the PasswordInfo object.
-            //generatedPassword.Password = PasswordGenerator();         ======== need to update to new binary stype
-            generatedPassword.LabelType = label;
-            generatedPassword.UserId = UID;
-            generatedPassword.DateCreated = DateTime.Now;
+            // Decrypt the password.
+            plainTextPass = userCrypt.decryptPassword(passwordToReturn.Password);
 
-            // Add generated password into DB and update.
-            rPassword.Add(generatedPassword);
-            rPassword.Update();
-
-            // Return to the Index of the profile page.
-            return RedirectToAction("Index", "Profile", new { userId = UID });
+            return plainTextPass;
         }
 
         #region Password Generator Implementation

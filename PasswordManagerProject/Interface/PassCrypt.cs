@@ -72,10 +72,8 @@ namespace PasswordManagerProject.Interface
             decAlgorithm.Key = encAlgorithm.Key;
             decAlgorithm.Mode = CipherMode.ECB;
 
-
-
             byte[] plaintextBytes = Convert.FromBase64String(encryptedPass);
-            // Assign the params used in the encryption algorithm to the decryption object.
+            // Assign the params used in the en                                         cryption algorithm to the decryption object.
 
             // Create the decryption stream the TripleDES algorithm will use.
             MemoryStream decryptStream = new MemoryStream();
