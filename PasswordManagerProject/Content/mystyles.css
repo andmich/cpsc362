@@ -28,6 +28,18 @@ td {
     text-align: center; /* Center our text */
 }
 
+
+.brand {
+    display: block;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.navbar {
+   background: rgba(0,0,0,0.5);   /* for latest browsers */
+   background: #000;  /* fallback for older browsers */
+}
+
 /* Cells in even rows (2,4,6...) are one color */        
 tr:nth-child(even) td { background: #F1F1F1; }   
 
@@ -36,4 +48,3 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
 tr td:hover { background: #666; color: #FFF; }  
 /* Hover cell effect! */
-

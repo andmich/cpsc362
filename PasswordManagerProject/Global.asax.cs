@@ -24,5 +24,11 @@ namespace PasswordManagerProject
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
+
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            Session["userId"] = null;
+            Session["username"] = null;
+        }
     }
 }
