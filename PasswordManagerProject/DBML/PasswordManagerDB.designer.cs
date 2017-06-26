@@ -443,7 +443,7 @@ namespace PasswordManagerProject.DBML
 		
 		private int _PasswordId;
 		
-		private System.Data.Linq.Binary _Password;
+		private string _Password;
 		
 		private int _UserId;
 		
@@ -461,7 +461,7 @@ namespace PasswordManagerProject.DBML
     partial void OnCreated();
     partial void OnPasswordIdChanging(int value);
     partial void OnPasswordIdChanged();
-    partial void OnPasswordChanging(System.Data.Linq.Binary value);
+    partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
     partial void OnUserIdChanging(int value);
     partial void OnUserIdChanged();
@@ -502,8 +502,8 @@ namespace PasswordManagerProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarBinary(500)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(500)")]
+		public string Password
 		{
 			get
 			{
