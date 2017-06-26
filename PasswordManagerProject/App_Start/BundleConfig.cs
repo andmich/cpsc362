@@ -22,7 +22,8 @@ namespace PasswordManagerProject
         {
             bundles.Add(new ScriptBundle("~/alljs").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Scripts/bootstrap.js"));
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/myscripts.js"));
         }
 
     }
