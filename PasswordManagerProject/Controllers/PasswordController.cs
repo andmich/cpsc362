@@ -39,8 +39,8 @@ namespace PasswordManagerProject.Controllers
             passwordToAdd.DateCreated = DateTime.Now;
 
             // Update the database.
-            rPassword.Add(passwordToAdd);
-            rPassword.Update();
+            //rPassword.Add(passwordToAdd);
+            //rPassword.Update();
             
             // Return back to the profile page Index.
             return RedirectToAction("Index", "Profile", new { userId = UID});
@@ -95,7 +95,7 @@ namespace PasswordManagerProject.Controllers
             return RedirectToAction("Index", "Profile", new { userId = UID });
         }
 
-        public ActionResult GeneratePassword(int UID, string label)
+        public ActionResult GenerateAndSavePassword(int UID, string label)
         {
             var rPassword = new PasswordInfoRepository();
             var generatedPassword = new PasswordInfo();
@@ -179,5 +179,17 @@ namespace PasswordManagerProject.Controllers
             return pass;
         }
 #endregion
+
+        #region Ajax Calls
+        #region Generate Password
+        public ActionResult GeneratePassword()
+        {
+            var password = PasswordGenerator();
+
+
+            return Json(password);
+        }
+        #endregion
+        #endregion
     }
 }
