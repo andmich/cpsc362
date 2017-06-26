@@ -14,22 +14,96 @@
     @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { name = "LoginForm", @class = "form-horizontal", enctype = "multipart/form-data" }))
     {
         <div class="panel-body">
-            <div class="form-group">                
+            <div class="form-group">
                 <label class="col-sm-3 control-label">Username</label>
                 <div class="col-sm-6">
-                    @Html.TextBox("username", "", new {@class = "form-control", @placeholder = "enter username" })
+                    @Html.TextBox("username", "", new { @class = "form-control", @placeholder = "enter username" })
                 </div>
             </div>
-            <div class="form-group">                
+            <div class="form-group">
                 <label class="col-sm-3 control-label">Password</label>
                 <div class="col-sm-6">
-                    @Html.TextBox("password", "", new {@class = "form-control", @placeholder = "enter password", @type = "password"  })
+                    @Html.TextBox("password", "", new { @class = "form-control", @placeholder = "enter password", @type = "password" })
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
-            <button class="center-block btn btn-primary" type="submit">Login</button>
+        <div class="panel-footer text-center">
+            <button class="btn btn-primary" type="submit">Login</button>
+            <div class="btn btn-info" data-toggle="modal" data-target="#addNewUserOption">New User</div>
         </div>
     }
 </div>
 
+<!-- New User modal -->
+<div class="modal fade" id="addNewUserOption" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add New User</h4>
+            </div>
+            @using (Html.BeginForm("AddNewUser", "Login", FormMethod.Post, new { name = "AddNewUser", @class = "form-horizontal" }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Username</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("NewUsername", string.Empty, new { @class = "form-control", maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Password</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("NewMasterPassword", string.Empty, new { @class = "form-control", maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Full Name</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("NewFullName", string.Empty, new { @class = "form-control", maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            @Html.TextBox("NewEmail", string.Empty, new { @class = "form-control", maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date Of Birth</label>
+                        <div class="col-sm-3">
+                            @Html.TextBox("NewMonth", string.Empty, new { @class = "form-control", maxlength = "2", @type = "number" })
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBox("NewDay", string.Empty, new { @class = "form-control", maxlength = "1", @type = "number" })
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBox("NewYear", string.Empty, new { @class = "form-control", maxlength = "4", @type = "number" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="center-block btn btn-success" type="submit">Register</button>
+                    <div class="btn btn-warning" data-dismiss="modal">Cancel</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Java Script -->
+<script src="/Scripts/jquery-3.1.1.min.js"></script>
+<script src="/Scripts/jquery-ui-1.8.20.min.js"></script>
+<script src="/Scripts/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+    });
+
+
+</script>

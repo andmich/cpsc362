@@ -35,5 +35,29 @@ namespace PasswordManagerProject.Controllers
             return Index();
         }
 
+
+        [HttpPost]
+        public ActionResult AddNewUser(FormCollection values)
+        {
+            var rUserInfo = new UserInfoRepository("Server=tcp:pass123.database.windows.net,1433;Initial Catalog=pass123db;Persist Security Info=False;User ID=cpsc362;Password=Password123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+            var dateYear = Convert.ToInt32(values["NewYear"]);
+            var dateMonth = Convert.ToInt32(values["NewMonth"]);
+            var dateDay = Convert.ToInt32(values["NewDay"]);
+
+            var userInfo = new UserInfo();
+            userInfo.Username = values["NewUsername"];
+            userInfo.FullName = values["NewFullName"];
+            userInfo.MasterPassword = values["NewMasterPassword"];
+            userInfo.DateOfBirth = new DateTime(dateYear, dateMonth, dateDay);
+            userInfo.EmailAddress = values["NewEmail"];
+            userInfo.DateCreated = DateTime.Now;
+
+            rUserInfo.Add(userInfo);
+            rUserInfo.Update();
+
+            return RedirectToAction("Index", "Profile", new { userId = userInfo.UserId });
+        }
+
     }
 }
