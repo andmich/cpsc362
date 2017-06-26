@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PasswordManagerProject.DBML;
 using PasswordManagerProject.Models;
+using PasswordManagerProject.Interface;
 
 namespace PasswordManagerProject.Controllers
 {
@@ -26,22 +27,25 @@ namespace PasswordManagerProject.Controllers
         }
         #endregion
 
-        // This should be [POST].
+        // This should be [POST]. NOTE: Master Password should be passed to this function.
         public ActionResult AddPassword(int UID, string password, string label)
         {
+            // Create the crypto function based on the users Master Password.
+            PasswordCrypt userCrypt = new PasswordCrypt("Password123");
+
             var rPassword = new PasswordInfoRepository();
             var passwordToAdd = new PasswordInfo();
 
             // Create new PasswordInfo object and pass user parameters into it.
-            //passwordToAdd.Password = password;                      ======== need to update to new binary stype
+            passwordToAdd.Password = userCrypt.encryptPassword(password);
             passwordToAdd.UserId = UID;
             passwordToAdd.LabelType = label;
             passwordToAdd.DateCreated = DateTime.Now;
 
-            // Update the database.
-            //rPassword.Add(passwordToAdd);
-            //rPassword.Update();
-            
+            //Update the database.
+            rPassword.Add(passwordToAdd);
+            rPassword.Update();
+
             // Return back to the profile page Index.
             return RedirectToAction("Index", "Profile", new { userId = UID});
         }
