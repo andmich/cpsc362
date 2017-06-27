@@ -3,4 +3,7 @@
 
 PasswordManagerProject/bin/
 packages/
-PasswordManagerProject/obj/Debug/
+PasswordManagerProject/obj/
+PasswordManagerProject/PasswordManagerProject.csproj
+PasswordManagerProject/PasswordManagerProject.csproj.user
+*.config
