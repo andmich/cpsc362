@@ -28,6 +28,7 @@ namespace PasswordManagerProject.Controllers
         #endregion
 
         // This should be [POST]. NOTE: Master Password should be passed to this function.
+        [HttpPost, ValidateInput(false)]
         public ActionResult AddPassword(FormCollection values)
         {
             var rUserInfo = new UserInfoRepository();
