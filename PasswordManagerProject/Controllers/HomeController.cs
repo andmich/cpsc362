@@ -11,8 +11,13 @@ namespace PasswordManagerProject.Controllers
         //
         // GET: /Home/
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(bool logout = false)
         {
+            if(logout)
+            {
+                HttpContext.Session["userId"] = null;
+            }
+
             return View();
         }
     }
