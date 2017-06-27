@@ -1,42 +1,4 @@
-<<<<<<< Updated upstream
-﻿@model PasswordManagerProject.Models.LoginViewModel
-
-@{
-    ViewBag.Title = "Log in";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Navigation = "false";
-}
-
-<div class="contentpanel">
-    <div class="panel-header">
-        <h2 align="Center">Please Login</h2>
-    </div>
-
-    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { name = "LoginForm", @class = "form-horizontal", enctype = "multipart/form-data" }))
-    {
-        <div class="panel-body">
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Username</label>
-                <div class="col-sm-6">
-                    @Html.TextBox("username", "", new { @class = "form-control", @placeholder = "enter username" })
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Password</label>
-                <div class="col-sm-6">
-                    @Html.TextBox("password", "", new { @class = "form-control", @placeholder = "enter password", @type = "password" })
-                </div>
-            </div>
-        </div>
-        <div class="panel-footer text-center">
-            <button class="btn btn-primary" type="submit">Login</button>
-            <div class="btn btn-info" data-toggle="modal" data-target="#addNewUserOption">New User</div>
-        </div>
-    }
-</div>
-
-=======
-﻿@model PasswordManagerProject.Models.LoginViewModel
+@model PasswordManagerProject.Models.LoginViewModel
 
 @{
     ViewBag.Title = "Log in";
@@ -65,14 +27,13 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
-            <button class="center-block btn btn-primary" type="submit">Login</button>
-            <div class="center-block btn btn-info" data-toggle="modal" data-target="#addNewUserOption">New User</div>
+        <div class="panel-footer text-center">
+            <button class="btn btn-primary" type="submit">Login</button>
+            <div class="btn btn-info" data-toggle="modal" data-target="#addNewUserOption">New User</div>
         </div>
     }
 </div>
 
->>>>>>> Stashed changes
 <!-- New User modal -->
 <div class="modal fade" id="addNewUserOption" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -82,52 +43,32 @@
                 <h4 class="modal-title">Add New User</h4>
             </div>
             @using (Html.BeginForm("AddNewUser", "Login", FormMethod.Post, new { name = "AddNewUser", @class = "form-horizontal" }))
-<<<<<<< Updated upstream
             {
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Username</label>
                         <div class="col-sm-9">
                             @Html.TextBox("NewUsername", string.Empty, new { @class = "form-control", maxlength = "50" })
-=======
-            { 
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Username</label>                    
-                        <div class="col-sm-9">
-                            @Html.TextBox("NewUsername", string.Empty, new { @class = "form-control", maxlength = "50"})                        
->>>>>>> Stashed changes
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-<<<<<<< Updated upstream
                         <label class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
                             @Html.TextBox("NewMasterPassword", string.Empty, new { @class = "form-control", maxlength = "50" })
-=======
-                        <label class="col-sm-3 control-label">Password</label>                    
-                        <div class="col-sm-9">
-                            @Html.TextBox("NewMasterPassword", string.Empty, new { @class = "form-control", maxlength = "50"})                        
->>>>>>> Stashed changes
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Full Name</label>
                         <div class="col-sm-9">
-<<<<<<< Updated upstream
                             @Html.TextBox("NewFullName", string.Empty, new { @class = "form-control", maxlength = "50" })
-=======
-                            @Html.TextBox("NewFullName", string.Empty, new { @class = "form-control", maxlength = "50"})                        
->>>>>>> Stashed changes
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-<<<<<<< Updated upstream
                             @Html.TextBox("NewEmail", string.Empty, new { @class = "form-control", maxlength = "50" })
                         </div>
                     </div>
@@ -141,23 +82,7 @@
                             @Html.TextBox("NewDay", string.Empty, new { @class = "form-control", maxlength = "1", @type = "number" })
                         </div>
                         <div class="col-sm-3">
-                            @Html.TextBox("NewYear", string.Empty, new { @class = "form-control", maxlength = "4", @type = "number" })
-=======
-                            @Html.TextBox("NewEmail", string.Empty, new { @class = "form-control", maxlength = "50"})                        
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>                    
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Date Of Birth</label>
-                        <div class="col-sm-3">
-                            @Html.TextBox("NewMonth", string.Empty, new { @class = "form-control", maxlength = "2", @type = "number"})
-                        </div>
-                        <div class="col-sm-3">
-                            @Html.TextBox("NewDay", string.Empty, new { @class = "form-control", maxlength = "1", @type = "number"})
-                        </div>
-                        <div class="col-sm-3">
-                            @Html.TextBox("NewYear", string.Empty, new { @class = "form-control", maxlength = "4", @type = "number"})
->>>>>>> Stashed changes
+                            @Html.TextBox("NewYear", string.Empty, new { @class = "form-control", maxlength = "4", @type = "number" })                     
                         </div>
                     </div>
                 </div>
@@ -168,13 +93,12 @@
             }
         </div>
     </div>
-<<<<<<< Updated upstream
+
 </div>
 
-=======
 </div>
 
->>>>>>> Stashed changes
+
 <!-- Java Script -->
 <script src="/Scripts/jquery-3.1.1.min.js"></script>
 <script src="/Scripts/jquery-ui-1.8.20.min.js"></script>
@@ -182,11 +106,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-<<<<<<< Updated upstream
 
-=======
-        
->>>>>>> Stashed changes
     });
 
 
