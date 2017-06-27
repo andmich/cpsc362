@@ -47,7 +47,7 @@ namespace PasswordManagerProject.Controllers
             rPassword.Update();
 
             // Return back to the profile page Index.
-            return RedirectToAction("Index", "Profile", new { userId = UID});
+            return RedirectToAction("Index", "Profile", new { userId = UID });
         }
 
         // This function should be [POST]
@@ -62,7 +62,7 @@ namespace PasswordManagerProject.Controllers
             rPassword.Update();
 
             // Return back to the profile page Index.
-            return RedirectToAction("Index", "Profile", new { userId = UID});
+            return RedirectToAction("Index", "Profile", new { userId = UID });
         }
 
         // This function should be [POST]. NOTE: Master Password should be passed to this function.
@@ -185,14 +185,13 @@ namespace PasswordManagerProject.Controllers
             } while (length < 8);
             return pass;
         }
-#endregion
+        #endregion
 
         #region Ajax Calls
         #region Generate Password
         public ActionResult GeneratePassword()
         {
             var password = PasswordGenerator();
-
 
             return Json(password);
         }

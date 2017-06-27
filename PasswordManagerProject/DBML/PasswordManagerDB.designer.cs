@@ -451,6 +451,10 @@ namespace PasswordManagerProject.DBML
 		
 		private System.DateTime _DateCreated;
 		
+		private string _Username;
+		
+		private string _SecurityAnswer;
+		
 		private EntityRef<PasswordInfo> _PasswordInfo2;
 		
 		private EntityRef<PasswordInfo> _PasswordInfo1;
@@ -469,6 +473,10 @@ namespace PasswordManagerProject.DBML
     partial void OnLabelTypeChanged();
     partial void OnDateCreatedChanging(System.DateTime value);
     partial void OnDateCreatedChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnSecurityAnswerChanging(string value);
+    partial void OnSecurityAnswerChanged();
     #endregion
 		
 		public PasswordInfo()
@@ -578,6 +586,46 @@ namespace PasswordManagerProject.DBML
 					this._DateCreated = value;
 					this.SendPropertyChanged("DateCreated");
 					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(30)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecurityAnswer", DbType="VarChar(50)")]
+		public string SecurityAnswer
+		{
+			get
+			{
+				return this._SecurityAnswer;
+			}
+			set
+			{
+				if ((this._SecurityAnswer != value))
+				{
+					this.OnSecurityAnswerChanging(value);
+					this.SendPropertyChanging();
+					this._SecurityAnswer = value;
+					this.SendPropertyChanged("SecurityAnswer");
+					this.OnSecurityAnswerChanged();
 				}
 			}
 		}
