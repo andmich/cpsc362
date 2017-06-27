@@ -15,8 +15,7 @@ namespace PasswordManagerProject
         {
             bundles.Add(new StyleBundle("~/css")
                      .Include("~/Content/bootstrap.css")
-                     .Include("~/Content/mystyles.css")
-                     .Include("~/Content/font-awesome.css"));
+                     .Include("~/Content/mystyles.css"));
         }
 
         public static void ScriptBundle(BundleCollection bundles)
