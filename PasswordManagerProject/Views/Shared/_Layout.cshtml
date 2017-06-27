@@ -3,39 +3,14 @@
     <head>
         <meta charset="utf-8" />
         <title>Password123</title>
+        <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/css")
     </head>
     <body>
         <header>
-
-           <nav class="navbar navbar-inverse">
-              <div class="container-fluid">
-                <div class="container">
-                    <div class="navbar-header">
-                      <a class="navbar-brand" href="#">Password123</a>
-                    </div>
-                    @if (string.IsNullOrEmpty(ViewBag.Navigation))
-                    {
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/Profile?userId=@HttpContext.Current.Session["userId"]"><span class="glyphicon glyphicon-lock"></span> Passwords</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Welcome 
-                                    @HttpContext.Current.Session["userName"]!
-                                    <span class="glyphicon glyphicon-menu-down"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    }
-                </div>
-               
-              </div>
-            </nav>
+            @Html.Partial("Partial_navbar")
         </header>
         <div id="body">
             @RenderSection("featured", required: false)

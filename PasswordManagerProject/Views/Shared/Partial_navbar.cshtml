@@ -1,0 +1,30 @@
+﻿<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/Home">Password123</a></li>
+            </ul>
+            @if (HttpContext.Current.Session["userId"] != null)
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Profile?userId=@HttpContext.Current.Session["userId"]"><span class="glyphicon glyphicon-lock"></span> Passwords</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-user"></span> Welcome @HttpContext.Current.Session["userName"]!
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a id="logout" href="@Url.Action("Index", "Home")">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            }
+        </div>
+    </div>
+</nav>

@@ -48,7 +48,6 @@ namespace PasswordManagerProject.Controllers
 
             return PartialView("~/Views/Profile/PasswordAdditionalInfo.cshtml", viewModel);
         }
-
         
         #endregion
 
