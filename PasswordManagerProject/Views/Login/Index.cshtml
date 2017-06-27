@@ -78,13 +78,13 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Date Of Birth</label>
                         <div class="col-sm-3">
-                            @Html.TextBox("NewMonth", string.Empty, new { @class = "form-control", maxlength = "2", @type = "number", @min = 0 })
+                            @Html.TextBox("NewMonth", string.Empty, new { @placeholder = "Month", @class = "form-control", maxlength = "2", @type = "number", @min = 0 })
                         </div>
                         <div class="col-sm-3">
-                            @Html.TextBox("NewDay", string.Empty, new { @class = "form-control", maxlength = "1", @type = "number", @min = 0 })
+                            @Html.TextBox("NewDay", string.Empty, new { @placeholder = "Day", @class = "form-control", maxlength = "1", @type = "number", @min = 0 })
                         </div>
                         <div class="col-sm-3">
-                            @Html.TextBox("NewYear", string.Empty, new { @class = "form-control", maxlength = "4", @type = "number", @min = 0 })                     
+                            @Html.TextBox("NewYear", string.Empty, new { @placeholder = "Year", @class = "form-control", maxlength = "4", @type = "number", @min = 0 })                     
                         </div>
                     </div>
                 </div>
