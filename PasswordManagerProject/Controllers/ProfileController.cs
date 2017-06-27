@@ -10,7 +10,7 @@ namespace PasswordManagerProject.Controllers
 {
     public class ProfileController : Controller
     {
-        public ActionResult Index(int userId)
+        public ActionResult Index(int userId, string notification)
         {
             // load UserInfo with UserId passed in
             var rUserInfo = new UserInfoRepository();
@@ -28,11 +28,29 @@ namespace PasswordManagerProject.Controllers
             var viewModel = new ProfileViewModel()
             {
                 UserInfo = userInfo,
-                UserPasswords = userPasswords
+                UserPasswords = userPasswords,
+                Notification = notification
             };
 
             return View(viewModel);
         }
+
+        #region Ajax Functions
+        public ActionResult GetPasswordAdditionalInfo(int passId)
+        {
+            var rPasswordInfo = new PasswordInfoRepository();
+            var passwordInfo = rPasswordInfo.GetByPasswordId(passId);
+
+            var viewModel = new ProfileViewModel()
+            {
+                PasswordInfo = passwordInfo
+            };
+
+            return PartialView("~/Views/Profile/PasswordAdditionalInfo.cshtml", viewModel);
+        }
+
+        
+        #endregion
 
     }
 }

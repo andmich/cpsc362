@@ -13,6 +13,7 @@
         </div>
         
         <div class="btn btn-primary col-sm-2 col-sm-offset-2" onclick="OpenAddPasswordModal('@Model.UserInfo.UserId')">Add New Password</div>
+        
         <div class="clearfix"><br /><br /></div>
         <table class="col-sm-8 col-sm-offset-2">
             <thead>
@@ -22,7 +23,8 @@
                     <th>Date Created</th>
                     <th>Edit</th>
                     <th>More Info</th>
-                    <th>Copy</th>
+                    <th>View</th>
+                    <th>Remove</th>
                 </tr>        
             </thead>
             <tbody>
@@ -38,17 +40,93 @@
                         <td>@pass.LabelType</td>
                         <td>@pass.DateCreated</td>
                         <td><a class="btn" href="@Url.Action("Edit", "Password", new { passwordId = pass.PasswordId })">Edit</a></td>
-                        <td><a id="additionalInfo" class="btn" href="#"><span class="glyphicon glyphicon-align-justify"></span></a></td>
-                        <td><a id="copyToClipboard" class="btn" href="#" onclick="copyToClipboard('@ctr');"><span class="glyphicon glyphicon-duplicate"></span></a></td>
+                        <td><a id="additionalInfo" class="btn" href="#" onclick="AdditionalInfoModal('@pass.PasswordId')"><span class="glyphicon glyphicon-align-justify"></span></a></td>
+                        <td><a class="btn" href="#" onclick="OpenViewPasswordModal('@(pass.UserId)', '@pass.PasswordId');"><span class="glyphicon glyphicon-duplicate"></span></a></td>
+                        <td><a class="btn" href="#" onclick="OpenRemovePassword('@pass.PasswordId');"><span class="glyphicon glyphicon-remove-sign"></span></a></td>
                     </tr>
                     
                     ctr++;
                 }
             </tbody>
         </table>
+        <div class="clearfix"></div>        
+        @if (!string.IsNullOrEmpty(Model.Notification))
+        {
+            <div class="col-md-12" style="background-color:greenyellow; margin:20px;">@Model.Notification</div>
+        }        
     </div>
 </div>
 
+<!-- View Password modal -->
+<div class="modal fade" id="viewPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">View Password</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Hidden("userIdToView")
+                @Html.Hidden("passIdToView")
+                <label class="col-sm-12 control-label">Please reauthenticate with you master password to view:</label>    
+                <div class="clearfix"></div>
+                <label class="col-sm-3 control-label">Master Password</label>    
+                <div class="col-sm-6">
+                    @Html.TextBox("passwordInput", string.Empty, new { @class = "form-control", maxlength = "50", id = "passwordInputToView", @type = "password" })
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <div class="btn btn-info" onclick="ViewPassword()">View</div>
+                <div class="btn btn-warning" data-dismiss="modal">Cancel</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Remove Password modal -->
+<div class="modal fade" id="removePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Remove Password</h4>
+            </div>
+            @using (Html.BeginForm("RemovePassword", "Password", FormMethod.Post, new { name = "RemovePassword", @class = "form-horizontal" }))
+            {             
+                @Html.Hidden("passwordIdToRemove")
+                <div class="modal-body">
+                    Are you sure you wish to remove this password?
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-danger" type="submit">Remove</button>
+                    <div class="btn btn-warning" data-dismiss="modal">Cancel</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Additional Info modal -->
+<div class="modal fade" id="additionalInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Additional Info</h4>
+            </div>
+            <div class="modal-body">       
+                <div id="additionalInfo-Body">
+
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!-- Add Password modal -->
 <div class="modal fade" id="addNewPasswordOption" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -78,6 +156,19 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label">Username for Password</label>
+                        <div class="col-sm-6">
+                            @Html.TextBox("username", string.Empty, new { @class = "form-control", maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Security Answer</label>
+                        <div class="col-sm-6">
+                            @Html.TextBox("securityAnswer", string.Empty, new { @class = "form-control", maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Label</label>
                         <div class="col-sm-6">
                             @Html.TextBox("label", string.Empty, new { @class = "form-control", maxlength = "20" })
@@ -85,8 +176,8 @@
                     </div>
                     <br /><br />
                 </div>
-                <div class="modal-footer">
-                    <button class="center-block btn btn-success" type="submit">Add Password</button>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-success" type="submit">Add Password</button>
                     <div class="btn btn-warning" data-dismiss="modal">Cancel</div>
                 </div>
             }
@@ -100,16 +191,11 @@
 <script src="/Scripts/jquery-3.1.1.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        
+    $(document).ready(function () {
+
     });
 
-    function OpenAddPasswordModal(userId) {
-        $('#UID').val(userId);
-        $('#addNewPasswordOption').modal('show');
-    }
-
-    function GeneratePassword() {        
+    function GeneratePassword() {
 
         $.ajax({
             url: '@Url.Action("GeneratePassword", "Password")',
@@ -122,25 +208,55 @@
             }
         });
     }
+    
 
-    function GetValue() {
-        var myarray = new Array("item1", "item2", "item3");
-        var random = myarray[Math.floor(Math.random() * myarray.length)];
-        //alert(random);
-        document.getElementById("message").innerHTML = random;
+    function AdditionalInfoModal(passId) {
+        $.ajax({
+            url: '@Url.Action("GetPasswordAdditionalInfo", "Profile")',
+            data: "passId=" + passId,
+            type: "POST",
+            async: true,
+            success: function (response) {
+                $('#additionalInfo-Body').html(response);
+                $('#additionalInfoModal').modal('show');
+            }
+        });
     }
 
-    function copyToClipboard(idNumber) {
+    function OpenRemovePassword(passId) {
+        $('#passwordIdToRemove').val(passId);
 
-        var elementId = 'password-' + idNumber;
-        var aux = document.createElement("input");
-        aux.setAttribute("value", document.getElementById(elementId).innerHTML);
-        document.body.appendChild(aux);
-        aux.select();
-        document.execCommand("copy");
-
-        document.body.removeChild(aux);
+        $('#removePasswordModal').modal('show');
 
     }
+
+    function ViewPassword() {
+
+        var userId = $('#userIdToView').val();
+        var passId = $('#passIdToView').val();
+        var masterPassword = $('#passwordInputToView').val();
+
+        $.ajax({
+            url: '@Url.Action("ViewPassword", "Password")',
+            data: "userId=" + userId + "&masterPassword=" + masterPassword + "&passId=" + passId,
+            type: "POST",
+            async: true,
+            success: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function OpenViewPasswordModal(userId, passId) {        
+        $('#userIdToView').val(userId);
+        $('#passIdToView').val(passId);
+        $('#viewPasswordModal').modal('show');
+    }
+
+    function OpenAddPasswordModal(userId) {
+        $('#UID').val(userId);
+        $('#addNewPasswordOption').modal('show');
+    }
+
 
 </script>

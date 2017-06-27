@@ -11,6 +11,7 @@ namespace PasswordManagerProject.Models
     {
         public UserInfo UserInfo { get; set; }
         public IQueryable<PasswordInfo> UserPasswords { get; set; }
-
+        public PasswordInfo PasswordInfo { get; set; }
+        public string Notification { get; set; }
     }
 }

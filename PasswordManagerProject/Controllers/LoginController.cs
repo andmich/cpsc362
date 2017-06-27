@@ -57,7 +57,9 @@ namespace PasswordManagerProject.Controllers
             rUserInfo.Add(userInfo);
             rUserInfo.Update();
 
-            return RedirectToAction("Index", "Profile", new { userId = userInfo.UserId });
+            var alert = "New User has been created. Welcome to your Password Manager!";
+
+            return RedirectToAction("Index", "Profile", new { userId = userInfo.UserId, notification = alert });
         }
 
     }

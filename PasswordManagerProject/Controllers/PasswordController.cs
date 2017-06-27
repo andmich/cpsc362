@@ -28,48 +28,62 @@ namespace PasswordManagerProject.Controllers
         #endregion
 
         // This should be [POST]. NOTE: Master Password should be passed to this function.
-        public ActionResult AddPassword(int UID, string password, string label)
+        public ActionResult AddPassword(FormCollection values)
         {
+            var rUserInfo = new UserInfoRepository();
+            var userInfo = rUserInfo.GetByUserId(Convert.ToInt32(values["UID"]));
+
             // Create the crypto function based on the users Master Password.
-            PasswordCrypt userCrypt = new PasswordCrypt("Password123");
+            PasswordCrypt userCrypt = new PasswordCrypt(userInfo.MasterPassword);
 
             var rPassword = new PasswordInfoRepository();
             var passwordToAdd = new PasswordInfo();
 
             // Create new PasswordInfo object and pass user parameters into it.
-            passwordToAdd.Password = userCrypt.encryptPassword(password);
-            passwordToAdd.UserId = UID;
-            passwordToAdd.LabelType = label;
+            passwordToAdd.Password = userCrypt.encryptPassword(values["password"]);
+            passwordToAdd.Username = values["username"];
+            passwordToAdd.SecurityAnswer = values["securityAnswer"];
+            passwordToAdd.UserId = Convert.ToInt32(values["UID"]);
+            passwordToAdd.LabelType = values["label"];
+            
             passwordToAdd.DateCreated = DateTime.Now;
 
             //Update the database.
             rPassword.Add(passwordToAdd);
             rPassword.Update();
 
+            var alert = "New Password has been saved!";
+
             // Return back to the profile page Index.
-            return RedirectToAction("Index", "Profile", new { userId = UID });
+            return RedirectToAction("Index", "Profile", new { userId = passwordToAdd.UserId, notification = alert });
         }
 
         // This function should be [POST]
-        public ActionResult RemovePassword(int UID, int passID)
+        public ActionResult RemovePassword(FormCollection values)
         {
             // Search for the password to delete.
             var rPassword = new PasswordInfoRepository();
-            var passWordToRemove = rPassword.GetByPasswordId(passID);
+            var passWordToRemove = rPassword.GetByPasswordId(Convert.ToInt32(values["passwordIdToRemove"]));
 
             // Delete the password and update DB.
             rPassword.Delete(passWordToRemove);
             rPassword.Update();
 
+            var alert = "Password has been removed";
+
             // Return back to the profile page Index.
-            return RedirectToAction("Index", "Profile", new { userId = UID });
+            return RedirectToAction("Index", "Profile", new { userId = passWordToRemove.UserId, notification = alert });
         }
 
         // This function should be [POST]. NOTE: Master Password should be passed to this function.
+        [HttpPost]
         public ActionResult EditPassword(int UID, int passID, string passwordChange)
         {
+            var rUserInfo = new UserInfoRepository();
+            var userInfo = rUserInfo.GetByUserId(UID);
+
             // User cryptographic function.
-            PasswordCrypt userCrypt = new PasswordCrypt("Password123");
+            PasswordCrypt userCrypt = new PasswordCrypt(userInfo.MasterPassword);
 
             // Search for the password to edit.
             var rPassword = new PasswordInfoRepository();
@@ -85,31 +99,39 @@ namespace PasswordManagerProject.Controllers
             return RedirectToAction("Index", "Profile", new { userId = UID });
         }
 
-        // This function should be [POST]
-        public ActionResult EditLabel(int UID, int passID, string label)
+        [HttpPost]
+        public ActionResult EditAdditionalInfo(FormCollection values)
         {
             // Search for the password to edit the label.
             var rPassword = new PasswordInfoRepository();
-            var passwordToEdit = rPassword.GetByPasswordId(passID);
+            var passwordToEdit = rPassword.GetByPasswordId(Convert.ToInt32(values["passId"]));
 
-            // Assign the new label.
-            passwordToEdit.LabelType = label;
+            // Assign new values
+            passwordToEdit.Username = values["username"];
+            passwordToEdit.SecurityAnswer = values["securityAnswer"];
+            passwordToEdit.LabelType = values["label"];
 
             // Update DB.
             rPassword.Update();
 
+            var alert = "Additional Info has been updated!";
+
             // Return back to the Profile Index page.
-            return RedirectToAction("Index", "Profile", new { userId = UID });
+            return RedirectToAction("Index", "Profile", new { userId = passwordToEdit.UserId, notification = alert });
         }
 
         // Get the plaintext version of the password. NOTE: Master Password should be passed to this function.
         public string GetPassword(int UID, int passID)
-        {   
+        {
+
+            var rUserInfo = new UserInfoRepository();
+            var userInfo = rUserInfo.GetByUserId(UID);
+
             // Used to store the plain text of the password.
             string plainTextPass = "";
 
             // User cryptographic function.
-            PasswordCrypt userCrypt = new PasswordCrypt("Password123");
+            var userCrypt = new PasswordCrypt(userInfo.MasterPassword);
 
             // Get the password to return.
             var rPassword = new PasswordInfoRepository();
@@ -196,6 +218,23 @@ namespace PasswordManagerProject.Controllers
             return Json(password);
         }
         #endregion
+
+        public ActionResult ViewPassword(int userId, string masterPassword, int passId)
+        {
+            var rUserInfo = new UserInfoRepository();
+            var userInfo = rUserInfo.GetByUserId(userId);
+
+            if (userInfo.MasterPassword == masterPassword)
+            {
+                var rPasswordInfo = new PasswordInfoRepository();
+                var passwordInfo = rPasswordInfo.GetByPasswordId(passId);
+
+                return Json("Your Password is: " + GetPassword(userInfo.UserId, passwordInfo.PasswordId));
+            }
+
+            return Json("Wrong Password. Please Try Again.");
+        }
+
         #endregion
     }
 }
