@@ -64,7 +64,6 @@ namespace PasswordManagerProject.Interface
             return Convert.ToBase64String(encryptedMessage);
         }
 
-        // Decrypt the password and return it as a string.
         public string decryptPassword(string encryptedPass)
         {
             // Create the TripleDES decryption aglorithm object.
@@ -72,22 +71,37 @@ namespace PasswordManagerProject.Interface
             decAlgorithm.Key = encAlgorithm.Key;
             decAlgorithm.Mode = CipherMode.ECB;
 
-            byte[] plaintextBytes = Convert.FromBase64String(encryptedPass);
-            // Assign the params used in the en                                         cryption algorithm to the decryption object.
+            string decryptedMessage = "";
 
-            // Create the decryption stream the TripleDES algorithm will use.
-            MemoryStream decryptStream = new MemoryStream();
-            CryptoStream decrypt = new CryptoStream(decryptStream, decAlgorithm.CreateDecryptor(), CryptoStreamMode.Write);
-            // Iterate over the encrypted password and decrypt it.
-            decrypt.Write(plaintextBytes, 0, plaintextBytes.Length);
-            decrypt.Flush();
-            decrypt.Close();
+            try
+            {
+                byte[] plaintextBytes = Convert.FromBase64String(encryptedPass);
+                // Assign the params used in the encryption algorithm to the decryption object.
 
-            // Extract the message from the stream.
-            string decryptedMessage = Encoding.Unicode.GetString(decryptStream.ToArray());
+                // Create the decryption stream the TripleDES algorithm will use.
+                MemoryStream decryptStream = new MemoryStream();
+                CryptoStream decrypt = new CryptoStream(decryptStream, decAlgorithm.CreateDecryptor(), CryptoStreamMode.Write);
+                // Iterate over the encrypted password and decrypt it.
+                decrypt.Write(plaintextBytes, 0, plaintextBytes.Length);
+                decrypt.Flush();
+                decrypt.Close();
 
-            // Reset the state of operations of the key.
-            passwordKey.Reset();
+                // Extract the message from the stream.
+                decryptedMessage = Encoding.Unicode.GetString(decryptStream.ToArray());
+
+                // Reset the state of operations of the key.
+                passwordKey.Reset();
+            }
+
+            catch (CryptographicException e)
+            {
+                if (e.Source != null)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+
+                throw;
+            }
 
             return decryptedMessage;
         }
